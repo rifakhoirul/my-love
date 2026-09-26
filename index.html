@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why I Love You, Indah 💕</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ffe0ec 0%, #ffc0cb 40%, #ffb6c1 70%, #f8c8d8 100%);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+      overflow: hidden;
+      padding: 20px;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Floating hearts background */
+    .heart-float {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 24px;
+      opacity: 0.3;
+      animation: floatUp linear infinite;
+      color: #ff6b9d;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(100vh) rotate(0deg) scale(0.5);
+        opacity: 0;
+      }
+      10% { opacity: 0.3; }
+      90% { opacity: 0.2; }
+      100% {
+        transform: translateY(-100px) rotate(360deg) scale(1);
+        opacity: 0;
+      }
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 600px;
+      text-align: center;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(20px);
+      border-radius: 24px;
+      padding: 50px 40px;
+      box-shadow:
+        0 8px 32px rgba(255, 107, 157, 0.25),
+        0 2px 8px rgba(255, 107, 157, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      transition: transform 0.3s ease, opacity 0.5s ease;
+    }
+
+    .card.hidden {
+      opacity: 0;
+      transform: scale(0.8) translateY(30px);
+      pointer-events: none;
+    }
+
+    .card.visible {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+      pointer-events: auto;
+    }
+
+    .start-screen {
+      padding: 40px 30px;
+    }
+
+    .heart-icon-large {
+      font-size: 72px;
+      display: inline-block;
+      animation: heartbeat 1.2s ease-in-out infinite;
+      margin-bottom: 20px;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      15% { transform: scale(1.15); }
+      30% { transform: scale(1); }
+      45% { transform: scale(1.1); }
+      60% { transform: scale(1); }
+    }
+
+    .title {
+      font-size: 36px;
+      font-weight: bold;
+      color: #d4466b;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+    }
+
+    .subtitle {
+      font-size: 20px;
+      color: #b87090;
+      margin-bottom: 30px;
+      font-style: italic;
+    }
+
+    .wife-name {
+      font-size: 28px;
+      color: #ff3d7f;
+      font-weight: bold;
+      margin-bottom: 30px;
+      font-family: 'Brush Script MT', cursive;
+    }
+
+    .btn {
+      background: linear-gradient(135deg, #ff6b9d, #e0457b);
+      color: white;
+      border: none;
+      padding: 16px 40px;
+      border-radius: 50px;
+      font-size: 18px;
+      font-family: 'Georgia', serif;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 107, 157, 0.4);
+      letter-spacing: 0.5px;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(255, 107, 157, 0.5);
+    }
+
+    .btn:active {
+      transform: translateY(-1px);
+    }
+
+    /* Reason screen */
+    .reason-number {
+      font-size: 14px;
+      color: #b87090;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 15px;
+    }
+
+    .reason-number span {
+      background: linear-gradient(135deg, #ff6b9d, #e0457b);
+      color: white;
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+    }
+
+    .reason-heart {
+      font-size: 48px;
+      margin-bottom: 20px;
+      display: inline-block;
+      animation: heartbeat 1.5s ease-in-out infinite;
+    }
+
+    .reason-text {
+      font-size: 22px;
+      color: #4a2c3a;
+      line-height: 1.6;
+      margin-bottom: 30px;
+      font-style: italic;
+      padding: 0 10px;
+    }
+
+    .reason-progress {
+      font-size: 14px;
+      color: #b87090;
+      margin-bottom: 25px;
+    }
+
+    .btn-next {
+      background: linear-gradient(135deg, #ff8db8, #ff6b9d);
+    }
+
+    .btn-next:hover {
+      background: linear-gradient(135deg, #ff9dbd, #ff7ca0);
+    }
+
+    /* Final screen */
+    .final-message {
+      font-size: 20px;
+      color: #4a2c3a;
+      line-height: 1.7;
+      margin-bottom: 10px;
+    }
+
+    .final-message strong {
+      color: #d4466b;
+    }
+
+    .final-heart {
+      font-size: 56px;
+      margin: 25px 0;
+      display: inline-block;
+      animation: heartbeat 1.5s ease-in-out infinite;
+    }
+
+    .end-note {
+      font-size: 14px;
+      color: #b87090;
+      margin-top: 30px;
+      font-style: italic;
+    }
+
+    /* Particle sparkles on screen */
+    .sparkle {
+      position: fixed;
+      width: 6px;
+      height: 6px;
+      background: #ff6b9d;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 2;
+      animation: sparkleFade 1.5s ease-out forwards;
+    }
+
+    @keyframes sparkleFade {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(0);
+        opacity: 0;
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 500px) {
+      .card {
+        padding: 35px 25px;
+      }
+      .title {
+        font-size: 28px;
+      }
+      .subtitle {
+        font-size: 17px;
+      }
+      .wife-name {
+        font-size: 22px;
+      }
+      .reason-text {
+        font-size: 18px;
+        padding: 0 5px;
+      }
+      .heart-icon-large {
+        font-size: 52px;
+      }
+      .reason-heart {
+        font-size: 38px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating hearts background -->
+  <div class="heart-float" id="heartFloat"></div>
+
+  <div class="container">
+    <!-- Start Screen -->
+    <div class="card visible" id="startCard">
+      <div class="start-screen">
+        <div class="heart-icon-large">💕</div>
+        <h1 class="title">Why I Love You</h1>
+        <p class="subtitle">Sepuluh alasan mengapa</p>
+        <p class="wife-name">Indah Widiyanti</p>
+        <br><br>
+        <button class="btn" onclick="startJourney()">Mulai ✨</button>
+      </div>
+    </div>
+
+    <!-- Reason Screen -->
+    <div class="card hidden" id="reasonCard">
+      <p class="reason-number"><span id="reasonCounter">1 / 10</span></p>
+      <div class="reason-heart" id="reasonHeart">💗</div>
+      <p class="reason-text" id="reasonText">Loading...</p>
+      <p class="reason-progress" id="reasonProgress"></p>
+      <button class="btn btn-next" id="nextBtn" onclick="nextReason()">Alasan berikutnya →</button>
+    </div>
+
+    <!-- Final Screen -->
+    <div class="card hidden" id="finalCard">
+      <div class="final-heart">💕</div>
+      <p class="final-message" id="finalMessage"></p>
+      <p class="end-note" id="endNote"></p>
+    </div>
+  </div>
+
+  <script>
+    const reasons = [
+      {
+        text: "Senyumanmu bisa mengubah hari-hari buruk jadi indah — secahaya matahari pagi yang menembus kamar.",
+        heart: "💗"
+      },
+      {
+        text: "Kamu selalu ada saat aku paling membutuhkan, bahkan saat aku sendiri dan nggak menyuruhmu.",
+        heart: "💗"
+      },
+      {
+        text: "Caramu merawat aku — dengan kata-kata, sentuhan, atau sekadar kehadiran — bikin aku merasa begitu berharga.",
+        heart: "💗"
+      },
+      {
+        text: "Kamu membuat rumah kita terasa seperti rumah, bukan sekadar tempat tinggal.",
+        heart: "🏡"
+      },
+      {
+        text: "Tikungan hidungmu yang nggak sempurna, leher yang pendek, postur yang nggak 'sebagitu' — semua jadi bagian dari keindahan yang nggak ada di mana else.",
+        heart: "🌸"
+      },
+      {
+        text: "Ketika kamu tertawa, seluruh dunia terasa lebih baik. Rasanya aku ingin menahan bayangan itu selamanya.",
+        heart: "😊"
+      },
+      {
+        text: "Kamu punya cara unik dan spontan buat membuat aku merasa dicintai — sesuatu yang nggak bisa dipelajari, hanya dirasakan.",
+        heart: "✨"
+      },
+      {
+        text: "Setiap pagi, saat aku bangun, kamu adalah alasan pertama aku suka hari ini.",
+        heart: "🌅"
+      },
+      {
+        text: "Dengan kamu, aku jadi versi terbaik dari diriku — lebih berani, lebih tulus, lebih hidup.",
+        heart: "💪"
+      },
+      {
+        text: "Cinta aku pada kamu tak akan pernah berhenti tumbuh. Semakin aku mengenalmu, semakin aku jatuh — dan itu baru awal.",
+        heart: "💞"
+      }
+    ];
+
+    const finalMessage = `
+      Indah,<br><br>
+      Ini cuma sepuluh alasan — tapi sebenarnya, alasan bisa dilakukan sampai infinity.<br><br>
+      Kamu adalah wanita yang paling menakjubkan yang pernah aku kenal.<br>
+      Terima kasih sudah jadi Indah Widiyanti — istriku, sahikatiku, dan cinta hidupku.<br><br>
+      <strong>Akulah orang yang paling beruntung di dunia karena punya kamu.</strong>
+    `;
+
+    const endNote = "Made with 💕 just for you, my love.";
+
+    let currentReason = 0;
+
+    function startJourney() {
+      showCard('startCard', false);
+      showCard('reasonCard', true);
+      showReason(0);
+      createSparkles();
+    }
+
+    function showReason(index) {
+      const reason = reasons[index];
+      document.getElementById('reasonText').textContent = reason.text;
+      document.getElementById('reasonHeart').textContent = reason.heart;
+      document.getElementById('reasonCounter').textContent = `${index + 1} / ${reasons.length}`;
+      document.getElementById('reasonProgress').textContent =
+        index === 0 ? 'Alasan pertama...' :
+        index === reasons.length - 1 ? 'Alasan terakhir...' :
+        `Alasan ke-${index + 1}...`;
+
+      // Heartbeat animation on heart
+      const heartEl = document.getElementById('reasonHeart');
+      heartEl.style.animation = 'none';
+      heartEl.offsetHeight; // trigger reflow
+      heartEl.style.animation = 'heartbeat 1.5s ease-in-out infinite';
+    }
+
+    function nextReason() {
+      currentReason++;
+
+      if (currentReason < reasons.length) {
+        // Animate transition
+        const reasonCard = document.getElementById('reasonCard');
+        reasonCard.classList.add('hidden');
+        reasonCard.classList.remove('visible');
+
+        setTimeout(() => {
+          showReason(currentReason);
+          reasonCard.classList.remove('hidden');
+          reasonCard.classList.add('visible');
+          createSparkles();
+        }, 400);
+      } else {
+        // Show final
+        const reasonCard = document.getElementById('reasonCard');
+        reasonCard.classList.add('hidden');
+        reasonCard.classList.remove('visible');
+
+        setTimeout(() => {
+          showCard('reasonCard', false);
+          showCard('finalCard', true);
+          document.getElementById('finalMessage').innerHTML = finalMessage;
+          document.getElementById('endNote').textContent = endNote;
+          createSparkles();
+          createSparkles();
+        }, 400);
+      }
+    }
+
+    function showCard(cardId, show) {
+      const card = document.getElementById(cardId);
+      if (show) {
+        card.classList.remove('hidden');
+        card.classList.add('visible');
+      } else {
+        card.classList.add('hidden');
+        card.classList.remove('visible');
+      }
+    }
+
+    function createSparkles() {
+      const count = 8;
+      for (let i = 0; i < count; i++) {
+        setTimeout(() => {
+          const sparkle = document.createElement('div');
+          sparkle.className = 'sparkle';
+          sparkle.style.left = Math.random() * window.innerWidth + 'px';
+          sparkle.style.top = Math.random() * window.innerHeight + 'px';
+          sparkle.style.width = (Math.random() * 8 + 4) + 'px';
+          sparkle.style.height = sparkle.style.width;
+          document.body.appendChild(sparkle);
+          setTimeout(() => sparkle.remove(), 1500);
+        }, i * 80);
+      }
+    }
+
+    // Create floating hearts
+    function createFloatingHearts() {
+      const container = document.getElementById('heartFloat');
+      const hearts = ['💕', '💗', '💖', '💘', '💝', '🌸'];
+
+      for (let i = 0; i < 15; i++) {
+        const heartEl = document.createElement('div');
+        heartEl.className = 'heart';
+        heartEl.textContent = hearts[i % hearts.length];
+        heartEl.style.left = Math.random() * 100 + '%';
+        heartEl.style.fontSize = (Math.random() * 20 + 16) + 'px';
+        heartEl.style.animationDuration = (Math.random() * 15 + 12) + 's';
+        heartEl.style.animationDelay = (Math.random() * 15) + 's';
+        container.appendChild(heartEl);
+      }
+    }
+
+    createFloatingHearts();
+
+    // Allow click/tap on card to go next (mobile friendly)
+    document.getElementById('reasonCard').addEventListener('click', function(e) {
+      if (e.target.tagName !== 'BUTTON' && currentReason < reasons.length) {
+        nextReason();
+      }
+    });
+  </script>
+</body>
+</html>
